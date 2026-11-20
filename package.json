@@ -12,6 +12,8 @@
   "dependencies": {
     "express": "^4.21.2",
     "helmet": "^8.0.0",
-    "express-rate-limit": "^7.5.0"
+    "express-rate-limit": "^7.5.0",
+    "@titaniumnetwork-dev/ultraviolet": "3.2.10",
+    "@mercuryworkshop/bare-mux": "^2.1.7"
   }
 }
