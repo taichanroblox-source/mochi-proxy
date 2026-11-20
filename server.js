@@ -2,6 +2,8 @@ import express from 'express';
 import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
 import path from 'node:path';
+import { uvPath } from '@titaniumnetwork-dev/ultraviolet';
+import { baremuxPath } from '@mercuryworkshop/bare-mux/node';
 import { fileURLToPath } from 'node:url';
 
 const app = express();
@@ -11,6 +13,8 @@ app.set('trust proxy', 1);
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(rateLimit({ windowMs: 60_000, limit: 120, standardHeaders: 'draft-7', legacyHeaders: false }));
 app.get('/health', (_req, res) => res.json({ status: 'ok', app: 'mochi-proxy' }));
+app.use('/uv/', express.static(uvPath));
+app.use('/baremux/', express.static(baremuxPath));
 app.use(express.static(path.join(root, 'public'), { extensions: ['html'] }));
 app.get('*', (_req, res) => res.sendFile(path.join(root, 'public', 'index.html')));
 const port = Number(process.env.PORT) || 3000;
